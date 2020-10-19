@@ -12,3 +12,5 @@ if(!isset($dadosRecebidos['idusuario']) || trim($dadosRecebidos['idusuario']) ==
 
 $retorno = $dao->atualizar($dadosRecebidos);
 echo json_encode($retorno);
+
+
