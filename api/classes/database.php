@@ -2,10 +2,10 @@
 
 class Database {
     
-    private $servername = "localhost";
-    private $username = "root";
-    private $password = "";
-    private $dbname = "vaDF";    
+    private $servername = "191.252.130.80";
+    private $username = "luanroxc_facul";
+    private $password = "?n@)3}hwDLD$";
+    private $dbname = "luanroxc_facul";    
     
     private $conexao;  
       
