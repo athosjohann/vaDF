@@ -12,12 +12,12 @@ Class JogadoresDAO{
 
         $parametros['senha'] = !empty($parametros['senha']) ? md5($parametros['senha']) : '';
 
-        $sql = "SELECT id_jogador, nome_jogador, email, ativo, email_confirmado FROM tbl_jogadores 
+        $sql = "SELECT id_jogador, nome_jogador, email, ativo, email_confirmado FROM tbl_jogador 
                 where email = :email 
                 and senha = :senha";
 
         $retorno = $this->conexao->ExecutarSQL($sql, $parametros);
-
+        var_dump($retorno);
         if(empty($retorno['dados'])){
             return array("sucesso" => false, "mensagem" => "Usuario ou senha invalidos!");
         }
@@ -32,7 +32,7 @@ Class JogadoresDAO{
 
         $retorno['dados'][0]['token'] = $this->gerarTokenJogador($retorno['dados'][0]['email']);
 
-        $this->conexao->ExecutarSQL("UPDATE tbl_jogadores SET token = :token , dtultconexao = now() WHERE id_jogador = :id_jogador", array("token" => $retorno['dados'][0]['token'],"id_jogador" => $retorno['dados'][0]['id_jogador']));
+        $this->conexao->ExecutarSQL("UPDATE tbl_jogador SET token = :token , dtultconexao = now() WHERE id_jogador = :id_jogador", array("token" => $retorno['dados'][0]['token'],"id_jogador" => $retorno['dados'][0]['id_jogador']));
 
         return array(
             "sucesso" => true,
@@ -44,7 +44,7 @@ Class JogadoresDAO{
     public function ObterDadosUsuarioToken($token){
 
         $reposta = $this->conexao->ExecutarSQL("SELECT *
-                                                FROM tbl_jogadores
+                                                FROM tbl_jogador
                                                 WHERE token = :token
                                                 AND ativo = 1", array("token" => $token));
 
@@ -56,7 +56,7 @@ Class JogadoresDAO{
             $retorno['mensagem'] = "Sessão do usuário ativa.";
             $retorno['dados'] = $reposta['dados'][0];
 
-            $this->conexao->ExecutarSQL("UPDATE tbl_jogadores SET dtultconexao = now() WHERE email = :email", array("email" => $reposta['dados'][0]['email']));
+            $this->conexao->ExecutarSQL("UPDATE tbl_jogador SET dtultconexao = now() WHERE email = :email", array("email" => $reposta['dados'][0]['email']));
 
             return $retorno;
         }
@@ -76,7 +76,7 @@ Class JogadoresDAO{
 
     public function cadastrar($parametros){
         
-        $sql = "INSERT INTO tbl_jogadores (
+        $sql = "INSERT INTO tbl_jogador (
                             nome_jogador,
                             data_nascimento,
                             email,
@@ -109,7 +109,7 @@ Class JogadoresDAO{
 
     public function alterarSenha($parametros){
         
-        $sql = "UPDATE tbl_jogadores SET senha = md5(:novasenha) where senha = md5(:senha) and trim(lower(email)) = trim(lower(:email))";
+        $sql = "UPDATE tbl_jogador SET senha = md5(:novasenha) where senha = md5(:senha) and trim(lower(email)) = trim(lower(:email))";
 
         $retorno = $this->conexao->ExecutarSQL($sql, $parametros);
 
@@ -122,7 +122,7 @@ Class JogadoresDAO{
 
     public function confirmarEmail($parametros){
         
-        $sql = "UPDATE tbl_jogadores SET email_confirmado = 1 where token = :token";
+        $sql = "UPDATE tbl_jogador SET email_confirmado = 1 where token = :token";
 
         $retorno = $this->conexao->ExecutarSQL($sql, $parametros);
 
@@ -135,7 +135,7 @@ Class JogadoresDAO{
 
     public function emailExiste($email){
         
-        $sql = "SELECT count(*) as total from tbl_jogadores where trim(lower(email)) = trim(lower(:email))";
+        $sql = "SELECT count(*) as total from tbl_jogador where trim(lower(email)) = trim(lower(:email))";
         $retorno = $this->conexao->ExecutarSQL($sql, array("email" => $email));
 
         if($retorno['dados'][0]['total'] > 0){
@@ -147,7 +147,7 @@ Class JogadoresDAO{
     }
 
     public function atualizar($parametros){
-        $sql = "UPDATE tbl_jogadores set 
+        $sql = "UPDATE tbl_jogador set 
                     nome_jogador = ifnull( :nome_jogador, nome_jogador ),
                     data_nascimento = ifnull( :data_nascimento, data_nascimento ),
                     email = ifnull( :email, email ),
@@ -170,7 +170,7 @@ Class JogadoresDAO{
     }
 
     public function consultar($parametros){
-        $sql = "SELECT * FROM tbl_jogadores where 1 = 1";
+        $sql = "SELECT * FROM tbl_jogador where 1 = 1";
         if(!empty($parametros['id_jogador'])){
             $sql .= " and id_jogador in (:id_jogador) ";
         }
