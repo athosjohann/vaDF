@@ -16,8 +16,7 @@ Class JogadoresDAO{
                 where email = :email 
                 and senha = :senha";
 
-        $retorno = $this->conexao->ExecutarSQL($sql, $parametros);
-        var_dump($retorno);
+        $retorno = $this->conexao->ExecutarSQL($sql, $parametros);        
         if(empty($retorno['dados'])){
             return array("sucesso" => false, "mensagem" => "Usuario ou senha invalidos!");
         }
