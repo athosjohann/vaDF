@@ -153,6 +153,9 @@ Class FuncionariosDAO{
         if(!empty($parametros['email'])){
             $sql .= " and email = :email ";
         }
+        if(!empty($parametros['matricula'])){
+            $sql .= " and matricula = :matricula ";
+        }
         if(!empty($parametros['ativo'])){
             $sql .= " and ativo = :ativo ";
         }
