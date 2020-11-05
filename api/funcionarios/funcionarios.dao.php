@@ -15,18 +15,14 @@ Class FuncionariosDAO{
         $sql = "SELECT matricula, nome_funcionario, email, token , ativo FROM tbl_funcionarios 
                 where email = :email 
                 and senha = :senha";
-
         $retorno = $this->conexao->ExecutarSQL($sql, $parametros);
+
         if(empty($retorno['dados'])){
             return array("sucesso" => false, "mensagem" => "Usuario ou senha invalidos!");
         }
 
         if($retorno['dados'][0]['ativo'] == 0){
             return array("sucesso" => false, "mensagem" => "Usuario inativo!");
-        }
-
-        if($retorno['dados'][0]['email_confirmado'] == 0){
-            return array("sucesso" => false, "mensagem" => "E-mail não confirmado!");
         }
 
         $retorno['dados'][0]['token'] = $this->gerarTokenFuncionario($retorno['dados'][0]['email']);
