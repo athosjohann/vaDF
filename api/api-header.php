@@ -38,7 +38,7 @@ if($validarUsuario){
     
     if(!isset($tokenUsuario) || $tokenUsuario != null || $tokenUsuario != ''){  
 
-        $VaDFAPI = new VaDFAPI('https://vadf.com.br/api/');    
+        $VaDFAPI = new VaDFAPI('https://va-df.herokuapp.com/api/');    
         $dadosUsuario = $VaDFAPI->POST('usuarios/sessaoativa.php', array("tokenusuario" => $tokenUsuario));
     
         if(!array_key_exists('sucesso', $dadosUsuario) || !($dadosUsuario['sucesso'] == true)){
