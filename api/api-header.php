@@ -39,11 +39,20 @@ if($validarUsuario){
     if(!isset($tokenUsuario) || $tokenUsuario != null || $tokenUsuario != ''){  
 
         $VaDFAPI = new VaDFAPI('https://va-df.herokuapp.com/api/');    
-        $dadosUsuario = $VaDFAPI->POST('usuarios/sessaoativa.php', array("tokenusuario" => $tokenUsuario));
+        $dadosUsuario = $VaDFAPI->POST('jogadores/sessaoativa.php', array("tokenusuario" => $tokenUsuario));
     
         if(!array_key_exists('sucesso', $dadosUsuario) || !($dadosUsuario['sucesso'] == true)){
-            $Utils->retornaErro("Usuário não logado ou sessão inválida.", 401);
-            exit;
+            
+            $dadosUsuario = $VaDFAPI->POST('funcionarios/sessaoativa.php', array("tokenusuario" => $tokenUsuario));
+            
+            if(!array_key_exists('sucesso', $dadosUsuario) || !($dadosUsuario['sucesso'] == true)){
+            
+                $Utils->retornaErro("Usuário não logado ou sessão inválida.", 401);
+                exit;
+            }else{
+                $dadosUsuario = $dadosUsuario["dados"];
+            }
+            
         }else{
             $dadosUsuario = $dadosUsuario["dados"];
         }
