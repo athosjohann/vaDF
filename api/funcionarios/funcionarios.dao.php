@@ -27,7 +27,7 @@ Class FuncionariosDAO{
 
         $retorno['dados'][0]['token'] = $this->gerarTokenFuncionario($retorno['dados'][0]['email']);
 
-        $this->conexao->ExecutarSQL("UPDATE tbl_funcionarios SET token = :token , dtultconexao = now() WHERE id_jogador = :id_jogador", array("token" => $retorno['dados'][0]['token'],"id_jogador" => $retorno['dados'][0]['id_jogador']));
+        $this->conexao->ExecutarSQL("UPDATE tbl_funcionarios SET token = :token , dtultconexao = now() WHERE matricula = :matricula", array("token" => $retorno['dados'][0]['token'],"matricula" => $retorno['dados'][0]['matricula']));
 
         return array(
             "sucesso" => true,
@@ -131,7 +131,7 @@ Class FuncionariosDAO{
                     token = ifnull( :token , token ),
                     dtultconexao = ifnull( :dtultconexao , dtultconexao ),
                     ativo = ifnull( :ativo , ativo )
-                WHERE id_jogador = :id_jogador";
+                WHERE matricula = :matricula";
         $retorno = $this->conexao->ExecutarSQL($sql, $parametros);
 
         if ($retorno["sucesso"] == true){
