@@ -17,7 +17,6 @@ Class FuncionariosDAO{
                 and senha = :senha";
 
         $retorno = $this->conexao->ExecutarSQL($sql, $parametros);
-        var_dump($retorno);
         if(empty($retorno['dados'])){
             return array("sucesso" => false, "mensagem" => "Usuario ou senha invalidos!");
         }
