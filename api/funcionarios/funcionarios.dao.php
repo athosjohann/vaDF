@@ -79,8 +79,8 @@ Class FuncionariosDAO{
                             dtultconexao,
                             ativo
                         ) VALUES ( 
-                            :nome_funcionario,
-                            :email,
+                            upper(:nome_funcionario),
+                            lower(:email),
                             :senha,
                             :token,
                             :dtultconexao,
