@@ -4,8 +4,8 @@ require_once('funcionarios.dao.php');
 
 $dao = new FuncionariosDAO($ConexaoBanco);
 
-if(!isset($dadosRecebidos['matricula']) || trim($dadosRecebidos['matricula']) == ''){
-    $retorno = array("sucesso" => false, "mensagem" => "Matricula invalida");
+if(!isset($dadosRecebidos['idusuario']) || trim($dadosRecebidos['idusuario']) == ''){
+    $retorno = array("sucesso" => false, "mensagem" => "Id. Usuario invalido");
     echo json_encode($retorno);
     exit;
 }
