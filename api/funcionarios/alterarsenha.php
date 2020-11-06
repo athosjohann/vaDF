@@ -1,9 +1,9 @@
 <?php
 $validarUsuario = true;
 require_once('../api-header.php');
-require_once('jogadores.dao.php');
+require_once('funcionarios.dao.php');
 
-$dao = new JogadoresDAO($ConexaoBanco);
+$dao = new FuncionariosDAO($ConexaoBanco);
 
 if(!isset($dadosRecebidos['email']) || $dadosRecebidos['email'] == ''){
     $retorno = array("sucesso" => false, "mensagem" => "E-mail não informado.");

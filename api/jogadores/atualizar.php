@@ -4,7 +4,7 @@ require_once('jogadores.dao.php');
 
 $dao = new JogadoresDAO($ConexaoBanco);
 
-if(!isset($dadosRecebidos['idusuario']) || trim($dadosRecebidos['idusuario']) == ''){
+if(!isset($dadosRecebidos['id_jogador']) || trim($dadosRecebidos['id_jogador']) == ''){
     $retorno = array("sucesso" => false, "mensagem" => "Id. Usuario invalido");
     echo json_encode($retorno);
     exit;
