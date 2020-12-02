@@ -67,7 +67,7 @@ Class PontosTuristicosDAO{
                             :experiencia,
                             :url_imagem,
                             :descricao,
-                            :matricula_cadastro,
+                            1,
                             :id_badge
                         )";
 
