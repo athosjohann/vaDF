@@ -1,7 +1,7 @@
 <?php
 require_once("../api-header.php");
-require_once("badges.dao.php");
+require_once("circuitos.dao.php");
 
-$dao = new BadgesDAO($ConexaoBanco);
+$dao = new CircuitosDAO($ConexaoBanco);
 $retorno = $dao->cadastrar($dadosRecebidos);
 echo json_encode($retorno);
