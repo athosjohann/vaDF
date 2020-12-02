@@ -115,9 +115,6 @@ Class PontosTuristicosDAO{
         if(empty($parametros['descricao'])){
             array_push($arrayErros, array("sucesso" => false, "mensagem" => "Descricao invalida"));
         }
-        if(empty($parametros['matricula_cadastro'])){
-            array_push($arrayErros, array("sucesso" => false, "mensagem" => "Matricula do funcionario que realizou o cadastro invalida"));
-        }
         if(empty($parametros['id_badge'])){
             array_push($arrayErros, array("sucesso" => false, "mensagem" => "Badge invalida"));
         }
