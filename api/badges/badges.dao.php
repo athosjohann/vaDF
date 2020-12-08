@@ -17,7 +17,8 @@ Class BadgesDAO{
                 tbl_badges.experiencia,
                 tbl_badges.matricula_cadastro,
                 tbl_funcionarios.nome_funcionario
-            FROM tbl_badges where 1 = 1";
+            FROM tbl_badges , tbl_funcionarios 
+            where tbl_badges.matricula_cadastro = tbl_funcionarios.matricula ";
         if(!empty($parametros['id_badge'])){
             $sql .= " and tbl_badges.id_badge = :id_badge ";
         }
