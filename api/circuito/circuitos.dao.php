@@ -18,7 +18,7 @@ Class CircuitosDAO{
                     tbl_circuitos.id_badge,
                     tbl_badges.nome_badge
          FROM tbl_circuitos, tbl_funcionarios, tbl_badges 
-         where tbl_circuitos.id_badge = tbl_badges.idbadge
+         where tbl_circuitos.id_badge = tbl_badges.id_badge
          and tbl_circuitos.matricula_cadastro = tbl_funcionarios.matricula";
         if(!empty($parametros['id_circuito'])){
             $sql .= " and tbl_circuitos.id_circuito = :id_circuito ";
